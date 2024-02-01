@@ -2,7 +2,10 @@ global arr, sel, v, n, m
 
 def recursive(count):
     if count == m:
-        print(*sel)
+        for i in sel:
+            print(i, end=" ")
+        # print(*sel)
+        print()
         return
 
     for i in range(n):
