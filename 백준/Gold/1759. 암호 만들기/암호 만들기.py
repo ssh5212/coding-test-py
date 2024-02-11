@@ -1,38 +1,37 @@
-# 순서에 상관 없음 (abc, bac는 동일하므로) == 조합
-global l, c, arr, sel
+global L, C, arr
 
+def recursive(count, answer):
+    if count == C:
 
-def recursive(count, index):
-    if count == l:
-        now = ""
-        ja = 0
-        mo = 0
+        if len(answer) == L:
+            moList = ["a","e", "i", "o", "u"]
+            mo = 0
+            ja = 0
+            for i in range(len(answer)):
+                if answer[i] in moList:
+                    mo += 1
+                else:
+                    ja += 1
 
-        for i in sel:
-            if i in ['a', 'e', 'i', 'o', 'u']:
-                mo += 1
-            else:
-                ja += 1
-            now += i
-
-        if ja >= 2 and mo >= 1:
-            print(now)
+            if mo >= 1 and ja >= 2:
+                print(answer)
 
         return
 
-    for i in range(index, c):
-        sel[count] = arr[i]
-        recursive(count + 1 , i + 1)
-        sel[count] = 0
+    recursive(count + 1, answer + arr[count])
+    recursive(count + 1, answer)
+
 
 
 def main():
-    global l, c, arr, sel
+    global L, C, arr
 
-    l, c = map(int, input().split(" "))
-    arr = list(map(str, input().split()))
+    L, C = map(int, input().split(" "))
+    arr = list(map(str, input().split(" ")))
+
     arr.sort()
-    sel = [0] * l
-    recursive(0, 0)
+
+    recursive(0, "")
+
 
 main()
